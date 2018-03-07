@@ -1,0 +1,14 @@
+{
+  "bind_addr": "@@BIND_ADDR@@",
+  "data_dir": "/data/consul",
+  "ui": true,
+  "retry_join": [
+    "consul0",
+    "consul1",
+    "consul2"
+  ],
+  "telemetry": {
+    "statsd_address": "localhost:8125",
+    "disable_hostname": true
+  }
+}

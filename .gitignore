@@ -1,0 +1,5 @@
+.vagrant/
+
+*.zip
+*.log
+
