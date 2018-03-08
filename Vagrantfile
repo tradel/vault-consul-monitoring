@@ -18,6 +18,7 @@ Vagrant.configure("2") do |config|
     statsbox.vm.network "private_network", auto_network: true, nic_type: "virtio", virtualbox__intnet: true
     statsbox.vm.network "forwarded_port", guest: 3000, host: 3000 # Graphite UI
     statsbox.vm.network "forwarded_port", guest: 8086, host: 8086 # InfluxDB
+    statsbox.vm.network "forwarded_port", guest: 8888, host: 8888 # Chronograf
 
     statsbox.vm.provision "hosts", autoconfigure: true, sync_hosts: true
     statsbox.vm.provision "shell", path: "statsbox/statsbox.sh"
