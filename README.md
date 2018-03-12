@@ -5,7 +5,7 @@ This project uses [Vagrant][] and [VirtualBox][] to spin up a [Vault][]
 cluster and a [Consul][] cluster on your own machine, with telemetry collected
 by [Telegraf][] and forwarded to [InfluxDB][] and [Chronograf][] for analysis.
 
-![Sample Consul Dashboard](https://i.imgur.com/sXQe0NW.png)
+![Sample Consul Dashboard](https://i.imgur.com/LQYrNTJ.png)
 
 ## Prerequisites
 
