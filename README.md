@@ -3,9 +3,9 @@ Monitoring Vault and Consul
 
 This project uses [Vagrant][] and [VirtualBox][] to spin up a [Vault][]
 cluster and a [Consul][] cluster on your own machine, with telemetry collected
-by [Telegraf][] and forwarded to [InfluxDB][] and [Chronograf][] for analysis.
+by [Telegraf][] and forwarded to [InfluxDB][] and [Grafana][] for analysis.
 
-![Sample Consul Dashboard](https://i.imgur.com/LQYrNTJ.png)
+![Sample Consul Dashboard](https://i.imgur.com/iAXyKKk.png)
 
 ## Prerequisites
 
@@ -20,12 +20,18 @@ should look similar to this:
  1. Clone this project from Github.
  2. Place the Consul and Vault binaries into the project folder.
  3. Run `vagrant up` and wait a while.
+ 4. Log into one of the Vault servers and initialize the cluster:
 
-## Configuring Chronograf
+        $ vagrant ssh vault0
+        export VAULT_ADDR=http://localhost:8200
+        vault operator init
+        vault operator unseal ...
 
- 1. Open http://localhost:8888/ in your browser. You will be prompted to add
-    an InfluxDB connection.
- 2. Configure the connection as follows:  
+## Configuring Grafana
+
+ 1. Open http://localhost:3000/ in your browser.
+ 2. You will be prompted to create your first data source. Configure the
+    connection as follows:  
 
     | Field             | Value                 |
     | ----------------- | --------------------- |
@@ -35,10 +41,15 @@ should look similar to this:
     | Password          | telegraf              |
     | Telegraf Database | telegraf              |
 
+ 3. Click the Home menu at the top of the Grafana home page, and select **Import
+    dashboard**. Browse to the location of `vault_cluster_health.json` and
+    import it. Do the same for `consul_cluster_health.json`.
+
 ## Future Enhancements
 
- 1. Provide sample dashboards out of the box.
- 2. Explain how to send output to CloudWatch, DataDog, and other systems.
+ * [x] ~~Provide sample dashboards out of the box.~~
+ * [ ] Explain how to send output to CloudWatch, DataDog, and other systems.
+ * [ ] Demonstrate alerting and proper thresholds.
 
 [Vagrant]: https://www.vagrantup.com/
 [VirtualBox]: https://www.virtualbox.org/
@@ -46,4 +57,4 @@ should look similar to this:
 [Consul]: https://www.consul.io/
 [Telegraf]: https://www.influxdata.com/time-series-platform/telegraf/
 [InfluxDB]: https://www.influxdata.com/time-series-platform/influxdb/
-[Chronograf]: https://www.influxdata.com/time-series-platform/chronograf/
+[Grafana]: https://grafana.com/
