@@ -12,7 +12,7 @@ apt-get install -y apt-transport-https ca-certificates curl \
   linux-image-extra-virtual
 
 #
-# Install InfluxDB
+# Install InfluxDB and friends
 #
 
 curl -sL https://repos.influxdata.com/influxdb.key | apt-key add -
