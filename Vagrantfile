@@ -59,6 +59,7 @@ Vagrant.configure("2") do |config|
 
       if "#{nodename}".include? "vault0" then
         thisnode.vm.network "forwarded_port", guest: 8200, host: 8200 # Vault UI
+        thisnode.vm.provision "shell", path: "vault/databases.sh"
       end
 
       thisnode.vm.provision "hosts", autoconfigure: true, sync_hosts: true
