@@ -1,3 +1,5 @@
+ui = true
+
 storage "consul" {
   address = "127.0.0.1:8500"
   path    = "vault"
@@ -9,6 +11,6 @@ listener "tcp" {
 }
 
 telemetry {
-  statsd_address   = "127.0.0.1:8125"
+  dogstatsd_addr   = "127.0.0.1:8125"
   disable_hostname = true
 }
