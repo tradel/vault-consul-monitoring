@@ -1,4 +1,8 @@
 .vagrant/
+
+.terraform/
+terraform.tfstate*
+
 .DS_Store
 
 *.zip
