@@ -29,3 +29,5 @@ install -c -m 0644 /vagrant/vault/vault_server.hcl /etc/vault.d
 systemctl daemon-reload
 systemctl enable vault
 systemctl restart vault
+
+echo "export VAULT_ADDR=http://localhost:8200" >> /home/vagrant/.profile

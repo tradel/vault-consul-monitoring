@@ -1,0 +1,11 @@
+{
+  "server": true,
+  "ui": true,
+  "addresses": {
+    "http": "0.0.0.0"
+  },
+  "telemetry": {
+    "dogstatsd_addr": "telegraf:8125",
+    "disable_hostname": true
+  }
+}
