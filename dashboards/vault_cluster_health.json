@@ -139,7 +139,7 @@
           "measurement": "consul_health_checks",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"passing\") AS unsealed FROM \"consul_health_checks\" WHERE role='vault-server' AND check_name='Vault Sealed Status'  GROUP BY \"check_id\"",
+          "query": "SELECT last(\"passing\") AS unsealed FROM \"telegraf\".\"autogen\".\"consul_health_checks\" WHERE role='vault-server' AND check_name='Vault Sealed Status' GROUP BY \"check_id\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
@@ -225,7 +225,7 @@
           "measurement": "cpu",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT max(\"usage_user\") AS \"user_cpu\", max(\"usage_iowait\") AS \"iowait_cpu\" FROM \"autogen\".\"cpu\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
+          "query": "SELECT max(\"usage_user\") AS \"user_cpu\", max(\"usage_iowait\") AS \"iowait_cpu\" FROM \"telegraf\".\"autogen\".\"cpu\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -365,7 +365,7 @@
           "measurement": "diskio",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT non_negative_difference(max(\"read_bytes\")) + non_negative_difference(max(\"write_bytes\")) AS \"bytes\" FROM \"diskio\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\"  =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
+          "query": "SELECT non_negative_difference(max(\"read_bytes\")) + non_negative_difference(max(\"write_bytes\")) AS \"bytes\" FROM \"telegraf\".\"autogen\".\"diskio\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\"  =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -497,7 +497,7 @@
           "measurement": "net",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT non_negative_difference(max(\"bytes_recv\")) + non_negative_difference(max(\"bytes_sent\")) AS \"bytes\" FROM \"net\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
+          "query": "SELECT non_negative_difference(max(\"bytes_recv\")) + non_negative_difference(max(\"bytes_sent\")) AS \"bytes\" FROM \"telegraf\".\"autogen\".\"net\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -620,10 +620,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_core_handle_request",
+          "measurement": "vault.core.handle_request",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(\"value\") AS \"count\" FROM \"telegraf\".\"consul_rpc_request\" WHERE $timeFilter AND \"role\"='consul-server' GROUP BY time($__interval), \"host\" FILL(null)",
+          "query": "SELECT mean(\"value\") AS \"count\" FROM \"telegraf\".\"autogen\".\"vault.core.handle_request\" WHERE $timeFilter AND \"role\"='consul-server' GROUP BY time($__interval), \"host\" FILL(null)",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -758,10 +758,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_runtime_alloc_bytes",
+          "measurement": "vault.runtime.alloc_bytes",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT max(\"value\") AS \"alloc_bytes\" FROM \"autogen\".\"vault_runtime_alloc_bytes\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(0)",
+          "query": "SELECT max(\"value\") AS \"alloc_bytes\" FROM \"telegraf\".\"autogen\".\"vault.runtime.alloc_bytes\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -804,7 +804,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT max(\"value\") AS \"sys_bytes\" FROM \"autogen\".\"vault_runtime_sys_bytes\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(0)",
+          "query": "SELECT max(\"value\") AS \"sys_bytes\" FROM \"telegraf\".\"autogen\".\"vault.runtime.sys_bytes\" WHERE (\"role\" = 'vault-server' AND \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(0)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -842,7 +842,7 @@
           "measurement": "mem",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"total\") AS \"total_bytes\" FROM \"mem\" WHERE (\"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/ AND \"role\" = 'vault-server') AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
+          "query": "SELECT mean(\"total\") AS \"total_bytes\" FROM \"telegraf\".\"autogen\".\"mem\" WHERE (\"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/ AND \"role\" = 'vault-server') AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "C",
           "resultFormat": "time_series",
@@ -956,7 +956,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "vault_consul_get.mean",
+          "alias": "vault.consul.get.mean",
           "bars": false,
           "lines": true
         }
@@ -981,10 +981,10 @@
             }
           ],
           "hide": false,
-          "measurement": "vault_barrier_get",
+          "measurement": "vault.consul.get",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"vault_consul_get\" WHERE \"datacenter\" =~ /^$dc$/ AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"telegraf\".\"autogen\".\"vault.consul.get\" WHERE \"datacenter\" =~ /^$dc$/ AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1019,10 +1019,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_barrier_get",
+          "measurement": "vault.consul.get",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"mean\") FROM \"vault_consul_get\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"mean\") FROM \"telegraf\".\"autogen\".\"vault.consul.get\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1121,7 +1121,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "vault_consul_put.mean",
+          "alias": "vault.consul.put.mean",
           "bars": false,
           "lines": true
         }
@@ -1146,10 +1146,10 @@
             }
           ],
           "hide": false,
-          "measurement": "vault_barrier_get",
+          "measurement": "vault.consul.put",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"vault_consul_put\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"telegraf\".\"autogen\".\"vault.consul.put\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1184,10 +1184,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_barrier_put",
+          "measurement": "vault.consul.put",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"mean\") FROM \"vault_consul_put\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"mean\") FROM \"telegraf\".\"autogen\".\"vault.consul.put\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1302,7 +1302,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_wal_persistWALs",
+          "measurement": "vault.wal.persistWALs",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -1345,7 +1345,7 @@
             }
           ],
           "hide": true,
-          "measurement": "vault_wal_persistWALs",
+          "measurement": "vault.wal.persistWALs",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1491,10 +1491,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_runtime_total_gc_pause_ns",
+          "measurement": "vault.runtime.gc_pause_ns",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"upper\")/1000000 AS \"milliseconds\" FROM \"telegraf\".\"vault_runtime_gc_pause_ns\" WHERE $timeFilter AND \"role\"='vault-server' GROUP BY host, time($__interval) FILL(0)",
+          "query": "SELECT last(\"upper\")/1000000 AS \"milliseconds\" FROM \"telegraf\".\"autogen\".\"vault.runtime.gc_pause_ns\" WHERE $timeFilter AND \"role\"='vault-server' GROUP BY host, time($__interval) FILL(0)",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1502,17 +1502,13 @@
             [
               {
                 "params": [
-                  "value"
+                  "upper"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "last"
-              },
-              {
-                "params": [],
-                "type": "non_negative_difference"
               },
               {
                 "params": [
@@ -1573,7 +1569,7 @@
           "format": "ms",
           "label": null,
           "logBase": 1,
-          "max": "q",
+          "max": null,
           "min": "0",
           "show": true
         },
@@ -1626,7 +1622,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "vault_consul_list.mean",
+          "alias": "vault.consul.list.mean",
           "bars": false,
           "lines": true
         }
@@ -1651,10 +1647,10 @@
             }
           ],
           "hide": false,
-          "measurement": "vault_barrier_get",
+          "measurement": "vault.consul.list",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"vault_consul_list\" WHERE \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"telegraf\".\"autogen\".\"vault.consul.list\" WHERE \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1689,10 +1685,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_barrier_list",
+          "measurement": "vault.consul.list",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"mean\") FROM \"vault_consul_list\" WHERE \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"mean\") FROM \"telegraf\".\"autogen\".\"vault.consul.list\" WHERE \"host\" =~ /^$host$/ AND \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1791,7 +1787,7 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "vault_consul_delete.mean",
+          "alias": "vault.consul.delete.mean",
           "bars": false,
           "lines": true
         }
@@ -1816,10 +1812,10 @@
             }
           ],
           "hide": false,
-          "measurement": "vault_barrier_get",
+          "measurement": "vault.consul.delete",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"vault_consul_delete\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT mean(\"90_percentile\") AS \"90_percentile\" FROM \"telegraf\".\"autogen\".\"vault.consul.delete\" WHERE \"datacenter\" =~ /^$dc$/  AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1854,7 +1850,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_consul_delete",
+          "measurement": "vault.consul.delete",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1976,7 +1972,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_wal_flushReady",
+          "measurement": "vault.wal.flushReady",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -2113,10 +2109,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "vault_core_leadership_lost",
+          "measurement": "vault.core.leadership_lost",
           "orderByTime": "ASC",
           "policy": "autogen",
-          "query": "SELECT max(\"upper\") FROM \"autogen\".\"vault_core_leadership_lost\" WHERE (\"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval) fill(0)",
+          "query": "SELECT max(\"upper\") FROM \"telegraf\".\"autogen\".\"vault.core.leadership_lost\" WHERE (\"datacenter\" =~ /^$dc$/) AND $timeFilter GROUP BY time($__interval) fill(0)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
