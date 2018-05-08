@@ -2,8 +2,8 @@
 
 Vagrant.require_version ">= 1.6.0"
 
-CONSUL_BINARY = "consul-enterprise_1.0.5+ent_linux_amd64.zip"
-VAULT_BINARY = "vault-enterprise_0.9.3+prem_linux_amd64.zip"
+CONSUL_BINARY = "consul-enterprise_1.0.7+ent_linux_amd64.zip"
+VAULT_BINARY = "vault-enterprise_0.10.1+ent_linux_amd64.zip"
 
 Vagrant.configure("2") do |config|
 
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     statsbox.vm.network "forwarded_port", guest: 3000, host: 3000 # Graphite UI
     statsbox.vm.network "forwarded_port", guest: 8086, host: 8086 # InfluxDB
     statsbox.vm.network "forwarded_port", guest: 8888, host: 8888 # Chronograf
-    statsbox.vm.network "forwarded_port", guest: 9092, host: 9092 # Kapacitor  
+    statsbox.vm.network "forwarded_port", guest: 9092, host: 9092 # Kapacitor
 
     statsbox.vm.provision "hosts", autoconfigure: true, sync_hosts: true
     statsbox.vm.provision "shell", path: "statsbox/statsbox.sh"
