@@ -41,4 +41,7 @@ apt-get update && apt-get -y install grafana
 
 systemctl daemon-reload
 systemctl enable grafana-server
+
+install -c -m 0644 /vagrant/statsbox/influxdb.yaml /etc/grafana/provisioning/datasources/influxdb.yaml
+
 systemctl restart grafana-server
