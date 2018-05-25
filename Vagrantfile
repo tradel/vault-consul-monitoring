@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "statsbox", autostart: true do |statsbox|
     statsbox.vm.box = "ubuntu/xenial64"
     statsbox.vm.provider "virtualbox" do |vb|
+      vb.linked_clone = true
       vb.memory = "1024"
       vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
     end
@@ -30,6 +31,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "#{nodename}", autostart: true do |thisnode|
       thisnode.vm.box = "ubuntu/xenial64"
       thisnode.vm.provider "virtualbox" do |vb|
+        vb.linked_clone = true
         vb.memory = "512"
         vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
       end
@@ -54,6 +56,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "#{nodename}", autostart: true do |thisnode|
       thisnode.vm.box = "ubuntu/xenial64"
       thisnode.vm.provider "virtualbox" do |vb|
+        vb.linked_clone = true
         vb.memory = "512"
         vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
       end
