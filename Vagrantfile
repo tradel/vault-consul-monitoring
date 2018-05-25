@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     end
 
     statsbox.vm.hostname = "statsbox"
-    statsbox.vm.network "private_network", auto_network: true, nic_type: "virtio", virtualbox__intnet: true
+    statsbox.vm.network "private_network", ip: "10.13.37.10"
     statsbox.vm.network "forwarded_port", guest: 3000, host: 3000 # Graphite UI
     statsbox.vm.network "forwarded_port", guest: 8086, host: 8086 # InfluxDB
     statsbox.vm.network "forwarded_port", guest: 8888, host: 8888 # Chronograf
@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
     statsbox.vm.provision "shell", path: "statsbox/statsbox.sh"
   end
 
-  %w(consul0 consul1 consul2).each do |nodename|
+  %w(consul0 consul1 consul2).each_with_index do |nodename, consul_index|
 
     config.vm.define "#{nodename}", autostart: true do |thisnode|
       thisnode.vm.box = "ubuntu/xenial64"
@@ -34,8 +34,11 @@ Vagrant.configure("2") do |config|
         vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
       end
 
+      ip_address = "10.13.37.#{20 + consul_index}"
+
       thisnode.vm.hostname = "#{nodename}"
-      thisnode.vm.network "private_network", auto_network: true, nic_type: "virtio", virtualbox__intnet: true
+
+      thisnode.vm.network "private_network", ip: ip_address
 
       if "#{nodename}".include? "consul0" then
         thisnode.vm.network "forwarded_port", guest: 8500, host: 8500 # Consul UI
@@ -46,7 +49,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  %w(vault0 vault1 vault2).each do |nodename|
+  %w(vault0 vault1 vault2).each_with_index do |nodename, vault_index|
 
     config.vm.define "#{nodename}", autostart: true do |thisnode|
       thisnode.vm.box = "ubuntu/xenial64"
@@ -56,7 +59,8 @@ Vagrant.configure("2") do |config|
       end
 
       thisnode.vm.hostname = "#{nodename}"
-      thisnode.vm.network "private_network", auto_network: true, nic_type: "virtio", virtualbox__intnet: true
+
+      ip_address = "10.13.37.#{30 + vault_index}"
 
       if "#{nodename}".include? "vault0" then
         thisnode.vm.network "forwarded_port", guest: 8200, host: 8200 # Vault UI
