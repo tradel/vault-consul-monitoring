@@ -10,7 +10,7 @@ ipaddr=$(ip addr show dev enp0s8 | awk 'match($0, /inet ([0-9.]*)\/24/, m) { pri
 
 cd /tmp
 apt-get -y install unzip
-unzip -o /vagrant/consul-*.zip -d /tmp
+unzip -o /vagrant/consul*.zip -d /tmp
 install -c -m 0755 /tmp/consul /usr/local/sbin
 install -c -m 0644 /vagrant/consul/consul.service /etc/systemd/system
 install -d -m 0755 -o vagrant /data/consul /etc/consul.d

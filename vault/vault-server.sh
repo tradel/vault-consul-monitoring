@@ -20,7 +20,7 @@ systemctl restart telegraf
 
 cd /tmp
 apt-get -y install unzip
-unzip -o /vagrant/vault-*.zip -d /tmp
+unzip -o /vagrant/vault*.zip -d /tmp
 install -c -m 0755 /tmp/vault /usr/local/sbin
 install -c -m 0644 /vagrant/vault/vault.service /etc/systemd/system
 install -d -m 0755 -o vagrant /data/vault /etc/vault.d
