@@ -2,6 +2,8 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
+apt-get -y install gawk
+
 ipaddr=$(ip addr show dev enp0s8 | awk 'match($0, /inet ([0-9.]*)\/24/, m) { print m[1] }')
 
 #
