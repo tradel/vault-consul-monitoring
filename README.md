@@ -19,8 +19,9 @@ should look similar to this:
 
  1. Clone this project from Github.
  2. Place the Consul and Vault binaries into the project folder.
- 3. Run `vagrant up` and wait a while.
- 4. Log into one of the Vault servers and initialize the cluster:
+ 3. Install the `vagrant-hosts` plugin: `vagrant plugin install vagrant-hosts`
+ 4. Run `vagrant up` and wait a while.
+ 5. Log into one of the Vault servers and initialize the cluster:
 
         $ vagrant ssh vault0
         export VAULT_ADDR=http://localhost:8200
