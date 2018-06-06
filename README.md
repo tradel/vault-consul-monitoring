@@ -31,17 +31,7 @@ should look similar to this:
 ## Configuring Grafana
 
  1. Open http://localhost:3000/ in your browser.
- 2. You will be prompted to create your first data source. Configure the
-    connection as follows:  
-
-    | Field             | Value                 |
-    | ----------------- | --------------------- |
-    | Connection String | http://localhost:8086 |
-    | Name              | InfluxDB              |
-    | Username          | telegraf              |
-    | Password          | telegraf              |
-    | Telegraf Database | telegraf              |
-
+ 2. The InfluxDB source will be automatically provisioned
  3. Click the Home menu at the top of the Grafana home page, and select **Import
     dashboard**. Browse to the location of `vault_cluster_health.json` and
     import it. Do the same for `consul_cluster_health.json`.
