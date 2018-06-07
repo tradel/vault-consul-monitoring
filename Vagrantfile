@@ -64,6 +64,8 @@ Vagrant.configure("2") do |config|
       thisnode.vm.hostname = "#{nodename}"
 
       ip_address = "10.13.37.#{30 + vault_index}"
+      
+      thisnode.vm.network "private_network", ip: ip_address
 
       if "#{nodename}".include? "vault0" then
         thisnode.vm.network "forwarded_port", guest: 8200, host: 8200 # Vault UI
