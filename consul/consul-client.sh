@@ -4,7 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install gawk
 
-ipaddr=$(ip addr show dev enp0s8 | awk 'match($0, /inet ([0-9.]*)\/24/, m) { print m[1] }')
+ipaddr=$(ifconfig | grep enp | awk '{print $1}' | xargs ip addr show dev | awk 'match($0, /inet ([0-9.]*)\/24/, m) { print m[1] }')
 
 #
 # Install Consul agent
