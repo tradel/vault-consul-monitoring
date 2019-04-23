@@ -12,8 +12,9 @@ by [Telegraf][] and forwarded to [InfluxDB][] and [Grafana][] for analysis.
 Make sure you have the enterprise binaries for Vault and Consul. The filenames
 should look similar to this:
 
-    consul-enterprise_1.0.5+ent_linux_amd64.zip
-    vault-enterprise_0.9.3+prem_linux_amd64.zip
+    consul-enterprise_1.4.4+ent_linux_amd64.zip
+    vault-enterprise-1.1.1+ent_linux_amd64.zip
+
 
 ## Setup
 
