@@ -2,8 +2,8 @@
 
 Vagrant.require_version ">= 1.6.0"
 
-CONSUL_BINARY = "consul-enterprise_1.0.7+ent_linux_amd64.zip"
-VAULT_BINARY = "vault-enterprise_0.10.1+ent_linux_amd64.zip"
+CONSUL_BINARY = "consul-enterprise_1.4.4+ent_linux_amd64.zip"
+VAULT_BINARY = "vault-enterprise-1.1.1_linux_amd64.zip"
 
 Vagrant.configure("2") do |config|
 
@@ -61,9 +61,11 @@ Vagrant.configure("2") do |config|
         vb.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 1000 ]
       end
 
+      ip_address = "10.13.37.#{30 + vault_index}"
+
       thisnode.vm.hostname = "#{nodename}"
 
-      ip_address = "10.13.37.#{30 + vault_index}"
+      thisnode.vm.network "private_network", ip: ip_address
 
       if "#{nodename}".include? "vault0" then
         thisnode.vm.network "forwarded_port", guest: 8200, host: 8200 # Vault UI
